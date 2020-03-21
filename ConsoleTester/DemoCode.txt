@@ -88,3 +88,38 @@ open while: compare.smaller: l0: 10
 
 	add: l0: 1
 close
+
+
+
+
+set ref as reference: array.get: arr: 2
+print_line: ref
+
+
+# Sorting
+set unsorted_array as array: [4,1,66,43,2,61,-10]
+print_line: Unsorted array = 
+print: unsorted_array
+print_line
+
+set l0 as number: 0
+open while: compare.smaller: l0: array.length: unsorted_array
+	set l1 as number: arithmetic.sum: l0: 1
+	set max_id as number: l0
+	open while: compare.smaller: l1: array.length: unsorted_array
+		set o0 as reference: array.get: unsorted_array: l0
+		set o1 as reference: array.get: unsorted_array: l1
+		open check: compare.larger: o0: o1
+			set tmp as number: o0
+			update: o0: o1
+			update: o1: tmp
+		close
+		add: l1: 1
+	close
+	add: l0: 1
+close
+
+print_line
+print_line: Sorted array = 
+print: unsorted_array
+print_line

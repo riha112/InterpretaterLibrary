@@ -48,9 +48,9 @@ namespace RihaInterpreterLibrary
 
         public static double NodeAsNumber(Node target) => target.Type switch
         {
-            ValueType.Number => (double) target.Value,
+            ValueType.Number => double.Parse(target.Value.ToString()),
             ValueType.Boolean => (int) target.Value,
-            ValueType.Array => ((List<object>)target.Value).Count,
+            ValueType.Array => ((List<Node>)target.Value).Count,
             ValueType.Text => ((string)target.Value).Length,
             _ => 0
         };

@@ -11,6 +11,7 @@ namespace RihaInterpreterLibrary
         Boolean,
         Array,
         Auto,
+        Reference,
         Function,
     }
 

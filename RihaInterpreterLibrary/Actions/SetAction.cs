@@ -19,12 +19,20 @@ namespace RihaInterpreterLibrary.Actions
 
             // Tries to capture value
             object value = "";
-            if(variables.Count > 0)
+            if (variables.Count > 0)
+            {
                 value = variables[^1].Value;
+                if (type == ValueType.Reference)
+                {
+                    HeapMemory.UpdateAdd(actionInParts[1], variables[^1]);
+                    return variables[^1];
+                }
+            }
+
+            if (type == ValueType.Reference) value = null;
 
             var node = new Node(value, type);
             HeapMemory.UpdateAdd(actionInParts[1], node);
-
             return node;
         }
     }
