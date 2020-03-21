@@ -27,6 +27,7 @@ namespace RihaInterpreterLibrary
                 namespacePath,
                 $"{namespacePath}.{nameof(RihaInterpreterLibrary.Actions.Compare)}",     // Compare library
                 $"{namespacePath}.{nameof(RihaInterpreterLibrary.Actions.Arithmetic)}",  // Arithmetic library
+                $"{namespacePath}.{nameof(RihaInterpreterLibrary.Actions.Array)}",       // Array library
             };
             foreach (var library in libraries)
             {

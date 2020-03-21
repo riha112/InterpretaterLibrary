@@ -25,6 +25,12 @@ namespace RihaInterpreterLibrary
                 return;
             }
 
+            if (ArrayController.StringIsArray((string)node.Value))
+            {
+                node.Value = ArrayController.StringToArray((string) node.Value);
+                node.Type = ValueType.Array;
+                return;
+            }
 
             node.Value = node.Value.ToString();
             node.Type = ValueType.Text;

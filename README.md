@@ -1,4 +1,4 @@
-# InterpretaterLibrary
+# Interpreter Library
 Rewriting old interpreter for custom language
 
 ## Demo code:
@@ -13,7 +13,21 @@ print_line: x
 print_line: compare.equal: variable: b
 print_line: compare.equal_type: variable: b
 print_line: compare.equal_value: variable: b
+print_line:
 
+set arr as array: [5,abcd,[22,43,[vvvv,bbb],true]]
+
+print_line: Array length is 
+print: array.length: arr
+print_line: arr
+print_line
+
+
+print_line: Sub-array lenght is 
+print: array.length: array.get: arr: 2
+print_line: array.get: arr: 2
+print_line
+print_line
 
 set x as number: 1
 open while: compare.smaller: x: 10
@@ -83,7 +97,7 @@ close
 ---
 ## Output
 ```
- 00 |  5
+  00 |  5
  01 |  9
  02 |  Hello world
  03 |  False
@@ -91,47 +105,55 @@ close
  05 |  False
  06 |  False
  07 |  True
- 08 |  False01|02|03|04|05|06|07|08|09|
- 09 |  02|04|06|08|10|12|14|16|18|
- 10 |  03|06|09|12|15|18|21|24|27|
- 11 |  04|08|12|16|20|24|28|32|36|
- 12 |  05|10|15|20|25|30|35|40|45|
- 13 |  06|12|18|24|30|36|42|48|54|
- 14 |  07|14|21|28|35|42|49|56|63|
- 15 |  08|16|24|32|40|48|56|64|72|
- 16 |  09|18|27|36|45|54|63|72|81|
- 17 |
- 18 |  Fibonacci sequence
- 19 |  1
- 20 |  2
- 21 |  3
- 22 |  5
- 23 |  8
- 24 |  13
- 25 |  21
- 26 |  34
- 27 |  55
- 28 |  89
- 29 |  144
- 30 |  233
- 31 |  377
- 32 |  610
- 33 |  987
- 34 |  1597
- 35 |  2584
- 36 |  4181
- 37 |  6765
- 38 |  10946
- 39 |
- 40 |  Factorial
- 41 |  0!=1
- 42 |  1!=1
- 43 |  2!=2
- 44 |  3!=6
- 45 |  4!=24
- 46 |  5!=120
- 47 |  6!=720
- 48 |  7!=5040
- 49 |  8!=40320
- 50 |  9!=362880
+ 08 |  False
+ 09 |
+ 10 |  Array length is 3
+ 11 |  [5,abcd,[22,43,[vvvv,bbb],True]]
+ 12 |
+ 13 |  Sub-array lenght is 4
+ 14 |  [22,43,[vvvv,bbb],True]
+ 15 |
+ 16 |  01|02|03|04|05|06|07|08|09|
+ 17 |  02|04|06|08|10|12|14|16|18|
+ 18 |  03|06|09|12|15|18|21|24|27|
+ 19 |  04|08|12|16|20|24|28|32|36|
+ 20 |  05|10|15|20|25|30|35|40|45|
+ 21 |  06|12|18|24|30|36|42|48|54|
+ 22 |  07|14|21|28|35|42|49|56|63|
+ 23 |  08|16|24|32|40|48|56|64|72|
+ 24 |  09|18|27|36|45|54|63|72|81|
+ 25 |
+ 26 |  Fibonacci sequence
+ 27 |  1
+ 28 |  2
+ 29 |  3
+ 30 |  5
+ 31 |  8
+ 32 |  13
+ 33 |  21
+ 34 |  34
+ 35 |  55
+ 36 |  89
+ 37 |  144
+ 38 |  233
+ 39 |  377
+ 40 |  610
+ 41 |  987
+ 42 |  1597
+ 43 |  2584
+ 44 |  4181
+ 45 |  6765
+ 46 |  10946
+ 47 |
+ 48 |  Factorial
+ 49 |  0!=1
+ 50 |  1!=1
+ 51 |  2!=2
+ 52 |  3!=6
+ 53 |  4!=24
+ 54 |  5!=120
+ 55 |  6!=720
+ 56 |  7!=5040
+ 57 |  8!=40320
+ 58 |  9!=362880
 ```

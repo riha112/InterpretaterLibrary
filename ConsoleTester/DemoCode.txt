@@ -8,7 +8,21 @@ print_line: x
 print_line: compare.equal: variable: b
 print_line: compare.equal_type: variable: b
 print_line: compare.equal_value: variable: b
+print_line:
 
+set arr as array: [5,abcd,[22,43,[vvvv,bbb],true]]
+
+print_line: Array length is 
+print: array.length: arr
+print_line: arr
+print_line
+
+
+print_line: Sub-array lenght is 
+print: array.length: array.get: arr: 2
+print_line: array.get: arr: 2
+print_line
+print_line
 
 set x as number: 1
 open while: compare.smaller: x: 10
