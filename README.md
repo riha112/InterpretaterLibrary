@@ -2,6 +2,7 @@
 Rewriting old interpreter for custom language
 
 ## Demo code:
+```
 set variable as number: 5
 print_line: variable
 print_line: set b as number: 9
@@ -33,7 +34,7 @@ open while: compare.smaller: x: 10
 close
 
 
-## Fibonacci sequence:
+# Fibonacci sequence:
 
 print_line: Fibonacci sequence
 set a as number: 0
@@ -52,7 +53,7 @@ close
 
 print_line
 
-## Factorial:
+# Factorial:
 
 print_line: Factorial
 set a as number: 0
@@ -78,3 +79,4 @@ open while: compare.smaller: l0: 10
 
 	add: l0: 1
 close
+```
