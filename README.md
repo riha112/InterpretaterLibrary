@@ -83,6 +83,7 @@ close
 ---
 ## Output
 ```
+ 00 |  5
  01 |  9
  02 |  Hello world
  03 |  False
