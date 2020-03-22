@@ -11,23 +11,21 @@ namespace RihaInterpreterLibrary.Translator
         {
             { @"\=\=\=",   ("===","compare.equal") },
             { @"\=\=",   ("==","compare.equal_value") },
-            { @"\>",   (">","compare.larger") },
-            { @"\<",   ("<","compare.smaller") },
-            { @"\*",   ("*","arithmetic.multiply") },
-            { @"\+",   ("+","arithmetic.sum") },
             { @"\@\=", ("@=","set")},
             { @"\+\=", ("+=","add") },
             { @"\-\=", ("-=","remove") },
             { @"\=",   ("=","update") },
+            { @"\+",   ("+","arithmetic.sum") },
+            { @"\>",   (">","compare.larger") },
+            { @"\<",   ("<","compare.smaller") },
+            { @"\*",   ("*","arithmetic.multiply") },
         };
-
-        private const string CapturePattern = @"\s*\w+\s*\+\=\s*\w+\s*";
 
         public string Translate(string code)
         {
             foreach (var entire in Library)
             {
-                code = Regex.Replace(code, @"\s*\w+\s*" +entire.Key+ @"\s*\w+\s*", m =>
+                code = Regex.Replace(code, @"\s*-?[\w\d]+\s*" + entire.Key+ @"\s*-?[\w\d]+\s*", m =>
                 {
                     // Gets value without quotes
                     var value = m.ToString().Replace(" ", "");

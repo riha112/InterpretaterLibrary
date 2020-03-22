@@ -7,7 +7,7 @@ namespace RihaInterpreterLibrary.Translator
 {
     public class ForLoopTranslator : ITranslator
     {
-        private const string CapturePattern = @"\s*for\([\@\:\<\>\+\<\-\,\.\=\w\d\s]*\|[\:\<\>\+\<\-\,\.\=\w\d\s]*\|[\:\<\>\+\<\-\,\.\=\w\d\s]*\)\s*";
+        private const string CapturePattern = @"\s*\@for\([\@\:\<\>\+\<\-\,\.\=\w\d\s]*\|[\:\<\>\+\<\-\,\.\=\w\d\s]*\|[\:\<\>\+\<\-\,\.\=\w\d\s]*\)\s*";
 
         public string Translate(string code)
         {
@@ -15,7 +15,7 @@ namespace RihaInterpreterLibrary.Translator
             {
                 // Gets value without for loop stuff
                 var value = m.ToString().Replace("\n", "");
-                value = value.Substring(4, value.Length - 5);
+                value = value.Substring(5, value.Length - 6);
 
                 var parts = value.Split('|');
                 var output = "";
