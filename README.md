@@ -16,7 +16,7 @@ print_line
 print_line: (set b as number: 9)
 print_line
 
-# ----------Safe string stored in queues----------
+# ----------Safe string stored in quotes----------
 print_line: "set x as text: print_line: compare.equal: a: b"
 print_line: "Previous action didn't execute because it was stored in safe string, thus x=": x
 print_line
