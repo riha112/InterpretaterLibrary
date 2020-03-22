@@ -38,7 +38,6 @@ print_line
 
 # ----------Multiplication table----------
 print_line: "Multiplication table:"
-print_line
 set x as number: 1
 open while: x < 10
 	set y as number: 1
@@ -53,7 +52,7 @@ open while: x < 10
 	print_line
 	x += 1
 close
-
+print_line
 
 # ----------Fibonacci sequence----------
 print_line: Fibonacci sequence
@@ -79,7 +78,6 @@ set b as number: 1
 
 set l0 as number: 0
 open while: l0 < 10
-	print_line
 	print: l0: "!="
 
 	set l1 as number: 2
@@ -90,8 +88,7 @@ open while: l0 < 10
 		l1 += 1
 
 	close
-	print: m
-
+	print_line: m
 	l0 += 1
 close
 print_line

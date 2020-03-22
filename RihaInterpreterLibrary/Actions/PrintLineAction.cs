@@ -16,7 +16,7 @@ namespace RihaInterpreterLibrary.Actions
             variables.Reverse();
             var value = variables.Aggregate("", (current, variable) => current + NodeController.NodeAsText(variable));
             var node = new Node(value, ValueType.Text);
-            Output.OutputLines.Add(NodeController.NodeAsText(node));
+            Output.Add(NodeController.NodeAsText(node));
             return node;
         }
     }

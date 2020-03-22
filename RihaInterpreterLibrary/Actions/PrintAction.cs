@@ -13,13 +13,10 @@ namespace RihaInterpreterLibrary.Actions
         public bool IsValid(string action) => action.ToLower() == ValidationPattern;
         public Node Execute(string[] actionInParts, List<Node> variables)
         {
-            if(Output.OutputLines.Count == 0)
-                Output.OutputLines.Add("");
-
             variables.Reverse();
             var value = variables.Aggregate("", (current, variable) => current + NodeController.NodeAsText(variable));
             var node = new Node(value, ValueType.Text);
-            Output.OutputLines[^1] += NodeController.NodeAsText(node);
+            Output.AddInline( NodeController.NodeAsText(node) );
             return node;
         }
     }

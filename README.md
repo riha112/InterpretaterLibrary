@@ -21,7 +21,7 @@ print_line: "set x as text: print_line: compare.equal: a: b"
 print_line: "Previous action didn't execute because it was stored in safe string, thus x=": x
 print_line
 
-# ----------Compressions----------
+# ----------Comparisons----------
 set comp_a as text: 9
 set comp_b as number: 9
 print_line: "A === B: ":        (compare.equal: comp_a: comp_b)
@@ -43,7 +43,6 @@ print_line
 
 # ----------Multiplication table----------
 print_line: "Multiplication table:"
-print_line
 set x as number: 1
 open while: x < 10
 	set y as number: 1
@@ -58,7 +57,7 @@ open while: x < 10
 	print_line
 	x += 1
 close
-
+print_line
 
 # ----------Fibonacci sequence----------
 print_line: Fibonacci sequence
@@ -84,7 +83,6 @@ set b as number: 1
 
 set l0 as number: 0
 open while: l0 < 10
-	print_line
 	print: l0: "!="
 
 	set l1 as number: 2
@@ -95,8 +93,7 @@ open while: l0 < 10
 		l1 += 1
 
 	close
-	print: m
-
+	print_line: m
 	l0 += 1
 close
 print_line
@@ -133,73 +130,74 @@ print_line: "Sorted array: ": unsorted_array
 ---
 ## Output
 ```
- 00 |  Hello world
- 01 |
- 02 |  Variables 'var_num' value is :5
- 03 |
- 04 |  9
- 05 |
- 06 |  set x as text: print_line: compare.equal: a: b
- 07 |  Previous action didn't execute becouse it was stored in safe string, thus x=x
- 08 |
- 09 |  A === B: False
- 10 |  A TYPE SAME B: False
- 11 |  A VALUE SAME B: True
- 12 |
- 13 |  Array: [5,abcd,[22,43,[vvvv,bbb],True]]
- 14 |  Array length is: 3
- 15 |
- 16 |  Sub-array of array is: [22,43,[vvvv,bbb],True]
- 17 |  Sub-array lenght is: 4
- 18 |
- 19 |  Multiplication table:
- 20 |  01 | 02 | 03 | 04 | 05 | 06 | 07 | 08 | 09 |
- 21 |  02 | 04 | 06 | 08 | 10 | 12 | 14 | 16 | 18 |
- 22 |  03 | 06 | 09 | 12 | 15 | 18 | 21 | 24 | 27 |
- 23 |  04 | 08 | 12 | 16 | 20 | 24 | 28 | 32 | 36 |
- 24 |  05 | 10 | 15 | 20 | 25 | 30 | 35 | 40 | 45 |
- 25 |  06 | 12 | 18 | 24 | 30 | 36 | 42 | 48 | 54 |
- 26 |  07 | 14 | 21 | 28 | 35 | 42 | 49 | 56 | 63 |
- 27 |  08 | 16 | 24 | 32 | 40 | 48 | 56 | 64 | 72 |
- 28 |  09 | 18 | 27 | 36 | 45 | 54 | 63 | 72 | 81 |
- 29 |
- 30 |  Fibonacci sequence
- 31 |  1
- 32 |  2
- 33 |  3
- 34 |  5
- 35 |  8
- 36 |  13
- 37 |  21
- 38 |  34
- 39 |  55
- 40 |  89
- 41 |  144
- 42 |  233
- 43 |  377
- 44 |  610
- 45 |  987
- 46 |  1597
- 47 |  2584
- 48 |  4181
- 49 |  6765
- 50 |  10946
- 51 |
- 52 |  Factorial
- 53 |  0!=1
- 54 |  1!=1
- 55 |  2!=2
- 56 |  3!=6
- 57 |  4!=24
- 58 |  5!=120
- 59 |  6!=720
- 60 |  7!=5040
- 61 |  8!=40320
- 62 |  9!=362880
- 63 |
- 64 |  [22,43,[vvvv,bbb],True]
- 65 |
- 66 |  Sorting
- 67 |  Unsorted array: [4,1,66,43,2,61,-10]
- 68 |  Sorted array: [-10,1,2,4,43,61,66]
+000 |  Hello world
+001 |
+002 |  Variables 'var_num' value is :5
+003 |
+004 |  9
+005 |
+006 |  set x as text: print_line: compare.equal: a: b
+007 |  Previous action didn't execute because it was stored in safe string, thus x=x
+008 |
+009 |  A === B: False
+010 |  A TYPE SAME B: False
+011 |  A VALUE SAME B: True
+012 |
+013 |  Array: [5,abcd,[22,43,[vvvv,bbb],True]]
+014 |  Array length is: 3
+015 |
+016 |  Sub-array of array is: [22,43,[vvvv,bbb],True]
+017 |  Sub-array length is: 4
+018 |
+019 |  Multiplication table:
+020 |  01 | 02 | 03 | 04 | 05 | 06 | 07 | 08 | 09 |
+021 |  02 | 04 | 06 | 08 | 10 | 12 | 14 | 16 | 18 |
+022 |  03 | 06 | 09 | 12 | 15 | 18 | 21 | 24 | 27 |
+023 |  04 | 08 | 12 | 16 | 20 | 24 | 28 | 32 | 36 |
+024 |  05 | 10 | 15 | 20 | 25 | 30 | 35 | 40 | 45 |
+025 |  06 | 12 | 18 | 24 | 30 | 36 | 42 | 48 | 54 |
+026 |  07 | 14 | 21 | 28 | 35 | 42 | 49 | 56 | 63 |
+027 |  08 | 16 | 24 | 32 | 40 | 48 | 56 | 64 | 72 |
+028 |  09 | 18 | 27 | 36 | 45 | 54 | 63 | 72 | 81 |
+029 |
+030 |  Fibonacci sequence
+031 |  1
+032 |  2
+033 |  3
+034 |  5
+035 |  8
+036 |  13
+037 |  21
+038 |  34
+039 |  55
+040 |  89
+041 |  144
+042 |  233
+043 |  377
+044 |  610
+045 |  987
+046 |  1597
+047 |  2584
+048 |  4181
+049 |  6765
+050 |  10946
+051 |
+052 |  Factorial
+053 |  0!=1
+054 |  1!=1
+055 |  2!=2
+056 |  3!=6
+057 |  4!=24
+058 |  5!=120
+059 |  6!=720
+060 |  7!=5040
+061 |  8!=40320
+062 |  9!=362880
+063 |
+064 |  [22,43,[vvvv,bbb],True]
+065 |
+066 |  Sorting
+067 |  Unsorted array: [4,1,66,43,2,61,-10]
+068 |  Sorted array: [-10,1,2,4,43,61,66]
+069 |
 ```

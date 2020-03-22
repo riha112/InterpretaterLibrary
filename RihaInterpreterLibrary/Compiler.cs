@@ -19,11 +19,12 @@ namespace RihaInterpreterLibrary
         private static List<string> GetClearCodeBase(string code)
         {
             code = new SafeTextTranslator().Translate(code);
+
+            code = code.Replace("\t", "");
             code = new PriorityTranslator().Translate(code);
             code = new SymbolTranslator().Translate(code);
 
             // Removes repeating whitespaces
-            code = code.Replace("\t", "");
             code = Utility.Utility.RemoveRepeatingSpace(code);
             code = Utility.Utility.RemoveColumnSpace(code);
 
