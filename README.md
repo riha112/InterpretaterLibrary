@@ -128,15 +128,22 @@ print_line: "Sorted array: ": unsorted_array
 print_line
 
 # ------- New For loop, If statment & auto initializer ------
-for(x @= 0| x < 9| x+=1)
-	for(y @= 0| y < 9| y+=1)
+@for(x @= 0| x < 9| x+=1)
+	@for(y @= 0| y < 9| y+=1)
 		m @= x * y
-		if:(m < 10)
+		@if(m < 10)
 			print: 0
 		close
-		print: (x * y): " | "
+		print: m: " | "
 	close
 	print_line
+close
+
+#---------------Each loop-------------
+print_line: "Each loop:"
+set testArr as array: [1, 2, 3, 10, 15]
+@each(mem|testArr)
+	print_line: mem
 close
 ```
 ---
@@ -221,4 +228,10 @@ close
 076 |  07 | 14 | 21 | 28 | 35 | 42 | 49 | 56 | 63 |
 077 |  08 | 16 | 24 | 32 | 40 | 48 | 56 | 64 | 72 |
 078 |  09 | 18 | 27 | 36 | 45 | 54 | 63 | 72 | 81 |
+079 |
+080 |  1
+081 |  2
+082 |  3
+083 |  10
+084 |  15
 ```

@@ -125,17 +125,17 @@ print_line
 
 
 # ------- For loop, If statment & auto initializer ------
-for(x @= 0| x < 9| x+=1)
-	for(y @= 0| y < 9| y+=1)
+@for(x @= 0| x < 9| x+=1)
+	@for(y @= 0| y < 9| y+=1)
 		m @= x * y
-		if:(m < 10)
+		@if(m < 10)
 			print: 0
 		close
 		print: (x * y): " | "
 	close
 	print_line
 close
-
+print_line
 
 # ------- Sorting with for loop
 
@@ -143,11 +143,11 @@ print_line: Sorting with for loop
 set unsorted_array_2 as array: [9.5, 12.2, -12, 22, 1000, 42]
 print_line: "Unsorted array: ": unsorted_array_2
 
-for(l0 @= 0| l0 < array.length: unsorted_array_2|)
-	for(l1 @= l0 + 1| l1 < array.length: unsorted_array_2|)
+@for(l0 @= 0| l0 < array.length: unsorted_array_2|)
+	@for(l1 @= l0 + 1| l1 < array.length: unsorted_array_2|)
 		set o0 as reference: array.get: unsorted_array_2: l0
 		set o1 as reference: array.get: unsorted_array_2: l1
-		open check: o0 > o1
+		@if(o0 > o1)
 			set tmp as number: o0
 			o0 = o1
 			o1 = tmp
@@ -157,3 +157,19 @@ for(l0 @= 0| l0 < array.length: unsorted_array_2|)
 	l0 += 1
 close
 print_line: "Sorted array: ": unsorted_array_2
+print_line
+
+@if( ((5+2)*3+(4+(4*4))) < ((5+2)*3+(4+(4*4))+1))
+	print: "Hello"
+close
+
+mm @= 0
+mm += 5 + 10 * 3
+print_line: mm
+
+#---------------Each loop-------------
+print_line: "Each loop:"
+set testArr as array: [1, 2, 3, 10, 15]
+@each(mem|testArr)
+	print_line: mem
+close
