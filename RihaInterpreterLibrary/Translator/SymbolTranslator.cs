@@ -9,16 +9,16 @@ namespace RihaInterpreterLibrary.Translator
     {
         private static readonly Dictionary<string, (string splitter, string replacer)> Library = new Dictionary<string, (string, string)>()
         {
-            { @"\+\=", ("+=","add") },
-            { @"\-\=", ("-=","remove") },
-            { @"\=",   ("=","update") },
-            { @"\*",   ("*","arithmetic.multiply") },
-            { @"\+",   ("+","arithmetic.sum") },
-
             { @"\=\=\=",   ("===","compare.equal") },
             { @"\=\=",   ("==","compare.equal_value") },
             { @"\>",   (">","compare.larger") },
-            { @"\<",   ("<","compare.smaller") }
+            { @"\<",   ("<","compare.smaller") },
+            { @"\*",   ("*","arithmetic.multiply") },
+            { @"\+",   ("+","arithmetic.sum") },
+            { @"\@\=", ("@=","set")},
+            { @"\+\=", ("+=","add") },
+            { @"\-\=", ("-=","remove") },
+            { @"\=",   ("=","update") },
         };
 
         private const string CapturePattern = @"\s*\w+\s*\+\=\s*\w+\s*";
@@ -36,7 +36,10 @@ namespace RihaInterpreterLibrary.Translator
                     var suffix = value[^1] == '\n' ? "\n" : "";
 
                     var parts = value.Replace("\n", "").Split(entire.Value.splitter);
-                    return $"{prefix}{entire.Value.replacer}:{parts[0]}:{parts[1]}{suffix}";
+
+                    return entire.Value.replacer.Equals("set") ? 
+                        $"{prefix}set {parts[0]} as auto:{parts[1]}{suffix}" : 
+                        $"{prefix}{entire.Value.replacer}:{parts[0]}:{parts[1]}{suffix}";
                 });
             }
             return code;

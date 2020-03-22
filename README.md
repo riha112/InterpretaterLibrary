@@ -124,8 +124,20 @@ open while: l0 < array.length: unsorted_array
 	close
 	l0 += 1
 close
-
 print_line: "Sorted array: ": unsorted_array
+print_line
+
+# ------- New For loop, If statment & auto initializer ------
+for(x @= 0| x < 9| x+=1)
+	for(y @= 0| y < 9| y+=1)
+		m @= x * y
+		if:(m < 10)
+			print: 0
+		close
+		print: (x * y): " | "
+	close
+	print_line
+close
 ```
 ---
 ## Output
@@ -200,4 +212,13 @@ print_line: "Sorted array: ": unsorted_array
 067 |  Unsorted array: [4,1,66,43,2,61,-10]
 068 |  Sorted array: [-10,1,2,4,43,61,66]
 069 |
+070 |  01 | 02 | 03 | 04 | 05 | 06 | 07 | 08 | 09 |
+071 |  02 | 04 | 06 | 08 | 10 | 12 | 14 | 16 | 18 |
+072 |  03 | 06 | 09 | 12 | 15 | 18 | 21 | 24 | 27 |
+073 |  04 | 08 | 12 | 16 | 20 | 24 | 28 | 32 | 36 |
+074 |  05 | 10 | 15 | 20 | 25 | 30 | 35 | 40 | 45 |
+075 |  06 | 12 | 18 | 24 | 30 | 36 | 42 | 48 | 54 |
+076 |  07 | 14 | 21 | 28 | 35 | 42 | 49 | 56 | 63 |
+077 |  08 | 16 | 24 | 32 | 40 | 48 | 56 | 64 | 72 |
+078 |  09 | 18 | 27 | 36 | 45 | 54 | 63 | 72 | 81 |
 ```
