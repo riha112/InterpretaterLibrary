@@ -6,6 +6,8 @@ namespace RihaInterpreterLibrary
 {
     public static class HeapMemory
     {
+        private static uint _hashCountId = 0;
+
         public static Dictionary<string, Node> Heap { get; set; }
         public static List<Scope> Scopes { get; set; }
 
@@ -22,5 +24,15 @@ namespace RihaInterpreterLibrary
             else
                 Heap.Add(name, value);
         }
+
+        public static string StoreHashed(Node value)
+        {
+            var name = GetHashedVariableName();
+            UpdateAdd(name, value);
+            return name;
+        }
+
+        public static string GetHashedVariableName() => 
+            "___var___" + Utility.Utility.RandomString(12) + _hashCountId++;
     }
 }

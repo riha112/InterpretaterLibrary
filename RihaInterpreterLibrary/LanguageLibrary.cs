@@ -28,6 +28,7 @@ namespace RihaInterpreterLibrary
                 $"{namespacePath}.{nameof(RihaInterpreterLibrary.Actions.Compare)}",     // Compare library
                 $"{namespacePath}.{nameof(RihaInterpreterLibrary.Actions.Arithmetic)}",  // Arithmetic library
                 $"{namespacePath}.{nameof(RihaInterpreterLibrary.Actions.Array)}",       // Array library
+                $"{namespacePath}.{nameof(RihaInterpreterLibrary.Actions.Text)}"         // String library
             };
             foreach (var library in libraries)
             {
@@ -39,6 +40,9 @@ namespace RihaInterpreterLibrary
             // Initializes all actions into dictionary
             foreach (var actionType in actionsTypes)
             {
+                if(!typeof(IAction).IsAssignableFrom(actionType))
+                    continue;
+
                 var action = (IAction) Activator.CreateInstance(actionType);
                 _actionDictionary.Add(action.ActionName, action);
             }

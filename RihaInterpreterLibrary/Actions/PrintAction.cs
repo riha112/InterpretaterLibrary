@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace RihaInterpreterLibrary.Actions
@@ -15,11 +16,11 @@ namespace RihaInterpreterLibrary.Actions
             if(Output.OutputLines.Count == 0)
                 Output.OutputLines.Add("");
 
-            if (variables.Count == 0)
-                return null;
-
-            Output.OutputLines[^1] += NodeController.NodeAsText(variables[^1]);
-            return variables[^1];
+            variables.Reverse();
+            var value = variables.Aggregate("", (current, variable) => current + NodeController.NodeAsText(variable));
+            var node = new Node(value, ValueType.Text);
+            Output.OutputLines[^1] += NodeController.NodeAsText(node);
+            return node;
         }
     }
 }

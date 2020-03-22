@@ -3,53 +3,64 @@ Rewriting old interpreter for custom language
 
 ## Demo code:
 ```
-set variable as number: 5
-print_line: variable
-print_line: set b as number: 9
+# ----------Hello world program using unsafe-string----------
 print_line: Hello world
-print_line: set x as text: print_line: compare.equal: a: b
-print_line: x
+print_line
 
-print_line: compare.equal: variable: b
-print_line: compare.equal_type: variable: b
-print_line: compare.equal_value: variable: b
+# ----------Setting variable & printing it----------
+set var_num as number: 5
+print_line: "Variables 'var_num' value is :": var_num
+print_line
+
+# ----------Chain actions with priority brackets----------
+print_line: (set b as number: 9)
+print_line
+
+# ----------Safe string stored in queues----------
+print_line: "set x as text: print_line: compare.equal: a: b"
+print_line: "Previous action didn't execute because it was stored in safe string, thus x=": x
+print_line
+
+# ----------Compressions----------
+set comp_a as text: 9
+set comp_b as number: 9
+print_line: "A === B: ":        (compare.equal: comp_a: comp_b)
+print_line: "A TYPE SAME B: ":  (compare.equal_type: comp_a: comp_b)
+print_line: "A VALUE SAME B: ": (compare.equal_value: comp_a: comp_b)
 print_line:
 
+# ----------Simple array----------
 set arr as array: [5,abcd,[22,43,[vvvv,bbb],true]]
+print_line: "Array: ": arr
+print_line: "Array length is: ": (array.length: arr)
+print_line
 
-print_line: Array length is 
-print: array.length: arr
-print_line: arr
+# ----------Sub-array----------
+print_line: "Sub-array of array is: ": (array.get: arr: 2)
+print_line: "Sub-array length is: ": (array.length: array.get: arr: 2)
 print_line
 
 
-print_line: Sub-array lenght is 
-print: array.length: array.get: arr: 2
-print_line: array.get: arr: 2
+# ----------Multiplication table----------
+print_line: "Multiplication table:"
 print_line
-print_line
-
 set x as number: 1
-open while: compare.smaller: x: 10
+open while: x < 10
 	set y as number: 1
-	open while: compare.smaller: y: 10
-		set m as number: arithmetic.multiply: x: y
-
-		open check: compare.smaller: m: 10
+	open while: y < 10
+		set m as number: x * y
+		open check: m < 10
 			print: 0
 		close
-
-		print: m
-		print: |
-		add: y: 1
+		print: m: " | "
+		y += 1
 	close
 	print_line
-	add: x: 1
+	x += 1
 close
 
 
-# Fibonacci sequence:
-
+# ----------Fibonacci sequence----------
 print_line: Fibonacci sequence
 set a as number: 0
 set b as number: 1
@@ -64,137 +75,131 @@ open while: compare.smaller: l0: 20
 
 	add: l0: 1
 close
-
 print_line
 
-# Factorial:
-
+# ----------Factorial----------
 print_line: Factorial
 set a as number: 0
 set b as number: 1
 
 set l0 as number: 0
-open while: compare.smaller: l0: 10
+open while: l0 < 10
 	print_line
-	
-	print: l0
-	print: !
-	print: =
+	print: l0: "!="
 
 	set l1 as number: 2
 	set m as number: 1
-	open while: compare.smaller: l1: arithmetic.sum: l0: 1
+	open while: l1 < l0 + 1
 		
-		set m as number: arithmetic.multiply: m: l1
-		add: l1: 1
+		set m as number: m * l1
+		l1 += 1
 
 	close
 	print: m
 
-	add: l0: 1
+	l0 += 1
 close
+print_line
 
-
-
-
+# ----------Reference variable----------
 set ref as reference: array.get: arr: 2
 print_line: ref
-
-
-# Sorting
-set unsorted_array as array: [4,1,66,43,2,61,-10]
-print_line: Unsorted array = 
-print: unsorted_array
 print_line
+
+# ----------Sorting----------
+print_line: Sorting
+set unsorted_array as array: [4,1,66,43,2,61,-10]
+print_line: "Unsorted array: ": unsorted_array
 
 set l0 as number: 0
-open while: compare.smaller: l0: array.length: unsorted_array
-	set l1 as number: arithmetic.sum: l0: 1
+open while: l0 < array.length: unsorted_array
+	set l1 as number: l0 + 1
 	set max_id as number: l0
-	open while: compare.smaller: l1: array.length: unsorted_array
+	open while: l1 < array.length: unsorted_array
 		set o0 as reference: array.get: unsorted_array: l0
 		set o1 as reference: array.get: unsorted_array: l1
-		open check: compare.larger: o0: o1
+		open check: o0 > o1
 			set tmp as number: o0
-			update: o0: o1
-			update: o1: tmp
+			o0 = o1
+			o1 = tmp
 		close
-		add: l1: 1
+		l1 += 1
 	close
-	add: l0: 1
+	l0 += 1
 close
 
-print_line
-print_line: Sorted array = 
-print: unsorted_array
-print_line
+print_line: "Sorted array: ": unsorted_array
 ```
 ---
 ## Output
 ```
- 00 |  5
- 01 |  9
- 02 |  Hello world
- 03 |  False
- 04 |  False
- 05 |  False
- 06 |  False
- 07 |  True
- 08 |  False
- 09 |
- 10 |  Array length is 3
- 11 |  [5,abcd,[22,43,[vvvv,bbb],True]]
+ 00 |  Hello world
+ 01 |
+ 02 |  Variables 'var_num' value is :5
+ 03 |
+ 04 |  9
+ 05 |
+ 06 |  set x as text: print_line: compare.equal: a: b
+ 07 |  Previous action didn't execute becouse it was stored in safe string, thus x=x
+ 08 |
+ 09 |  A === B: False
+ 10 |  A TYPE SAME B: False
+ 11 |  A VALUE SAME B: True
  12 |
- 13 |  Sub-array lenght is 4
- 14 |  [22,43,[vvvv,bbb],True]
+ 13 |  Array: [5,abcd,[22,43,[vvvv,bbb],True]]
+ 14 |  Array length is: 3
  15 |
- 16 |  01|02|03|04|05|06|07|08|09|
- 17 |  02|04|06|08|10|12|14|16|18|
- 18 |  03|06|09|12|15|18|21|24|27|
- 19 |  04|08|12|16|20|24|28|32|36|
- 20 |  05|10|15|20|25|30|35|40|45|
- 21 |  06|12|18|24|30|36|42|48|54|
- 22 |  07|14|21|28|35|42|49|56|63|
- 23 |  08|16|24|32|40|48|56|64|72|
- 24 |  09|18|27|36|45|54|63|72|81|
- 25 |
- 26 |  Fibonacci sequence
- 27 |  1
- 28 |  2
- 29 |  3
- 30 |  5
- 31 |  8
- 32 |  13
- 33 |  21
- 34 |  34
- 35 |  55
- 36 |  89
- 37 |  144
- 38 |  233
- 39 |  377
- 40 |  610
- 41 |  987
- 42 |  1597
- 43 |  2584
- 44 |  4181
- 45 |  6765
- 46 |  10946
- 47 |
- 48 |  Factorial
- 49 |  0!=1
- 50 |  1!=1
- 51 |  2!=2
- 52 |  3!=6
- 53 |  4!=24
- 54 |  5!=120
- 55 |  6!=720
- 56 |  7!=5040
- 57 |  8!=40320
- 58 |  9!=362880
- 59 |  [22,43,[vvvv,bbb],True]
- 60 |  Unsorted array = [4,1,66,43,2,61,-10]
- 61 |
- 62 |
- 63 |  Sorted array = [-10,1,2,4,43,61,66]
- 64 |
+ 16 |  Sub-array of array is: [22,43,[vvvv,bbb],True]
+ 17 |  Sub-array lenght is: 4
+ 18 |
+ 19 |  Multiplication table:
+ 20 |  01 | 02 | 03 | 04 | 05 | 06 | 07 | 08 | 09 |
+ 21 |  02 | 04 | 06 | 08 | 10 | 12 | 14 | 16 | 18 |
+ 22 |  03 | 06 | 09 | 12 | 15 | 18 | 21 | 24 | 27 |
+ 23 |  04 | 08 | 12 | 16 | 20 | 24 | 28 | 32 | 36 |
+ 24 |  05 | 10 | 15 | 20 | 25 | 30 | 35 | 40 | 45 |
+ 25 |  06 | 12 | 18 | 24 | 30 | 36 | 42 | 48 | 54 |
+ 26 |  07 | 14 | 21 | 28 | 35 | 42 | 49 | 56 | 63 |
+ 27 |  08 | 16 | 24 | 32 | 40 | 48 | 56 | 64 | 72 |
+ 28 |  09 | 18 | 27 | 36 | 45 | 54 | 63 | 72 | 81 |
+ 29 |
+ 30 |  Fibonacci sequence
+ 31 |  1
+ 32 |  2
+ 33 |  3
+ 34 |  5
+ 35 |  8
+ 36 |  13
+ 37 |  21
+ 38 |  34
+ 39 |  55
+ 40 |  89
+ 41 |  144
+ 42 |  233
+ 43 |  377
+ 44 |  610
+ 45 |  987
+ 46 |  1597
+ 47 |  2584
+ 48 |  4181
+ 49 |  6765
+ 50 |  10946
+ 51 |
+ 52 |  Factorial
+ 53 |  0!=1
+ 54 |  1!=1
+ 55 |  2!=2
+ 56 |  3!=6
+ 57 |  4!=24
+ 58 |  5!=120
+ 59 |  6!=720
+ 60 |  7!=5040
+ 61 |  8!=40320
+ 62 |  9!=362880
+ 63 |
+ 64 |  [22,43,[vvvv,bbb],True]
+ 65 |
+ 66 |  Sorting
+ 67 |  Unsorted array: [4,1,66,43,2,61,-10]
+ 68 |  Sorted array: [-10,1,2,4,43,61,66]
 ```

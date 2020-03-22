@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using RihaInterpreterLibrary.Translator;
 
 namespace RihaInterpreterLibrary
 {
@@ -17,6 +18,10 @@ namespace RihaInterpreterLibrary
         /// <returns>Compilation prepared code base lines</returns>
         private static List<string> GetClearCodeBase(string code)
         {
+            code = new SafeTextTranslator().Translate(code);
+            code = new PriorityTranslator().Translate(code);
+            code = new SymbolTranslator().Translate(code);
+
             // Removes repeating whitespaces
             code = code.Replace("\t", "");
             code = Utility.Utility.RemoveRepeatingSpace(code);

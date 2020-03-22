@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -7,6 +8,14 @@ namespace RihaInterpreterLibrary.Utility
 {
     public static class Utility
     {
+        private static readonly Random Random = new Random();
+        public static string RandomString(int length)
+        {
+            const string chars = "abvdefghijklmnoprstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            return new string(Enumerable.Repeat(chars, length)
+                .Select(s => s[Random.Next(s.Length)]).ToArray());
+        }
+
         public static bool MatchesRegex(string regex, string value)
         {
             var r = new Regex(regex, RegexOptions.IgnoreCase);
