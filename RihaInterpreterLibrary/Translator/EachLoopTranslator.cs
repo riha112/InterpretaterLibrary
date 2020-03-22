@@ -24,7 +24,7 @@ namespace RihaInterpreterLibrary.Translator
                 var output = $"\nset {tmpVariableName} as number: -1";
                 output += $"\nopen while: {tmpVariableName} < (array.length:{parts[1]}) + -1";
                 output += $"\n{tmpVariableName} += 1";
-                output += $"\nset {parts[0]} as auto: array.get: {parts[1]}: {tmpVariableName}\n";
+                output += $"\nset {parts[0]} as reference: array.get: {parts[1]}: {tmpVariableName}\n";
                 return output;
             });
         }
