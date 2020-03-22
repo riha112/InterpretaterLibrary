@@ -18,9 +18,11 @@ namespace RihaInterpreterLibrary
         /// <returns>Compilation prepared code base lines</returns>
         private static List<string> GetClearCodeBase(string code)
         {
+            // TODO: Move to TranslatorLibrary
             code = new SafeTextTranslator().Translate(code);
             code = code.Replace("\t", "");
             code = new ForLoopTranslator().Translate(code);
+            code = new EachLoopTranslator().Translate(code);
             code = new PriorityTranslator().Translate(code);
             code = new SymbolTranslator().Translate(code);
             code = new IfTranslator().Translate(code);
