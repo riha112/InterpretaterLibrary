@@ -7,6 +7,8 @@ namespace RihaInterpreterLibrary.Translator
 {
     class IfTranslator : ITranslator
     {
+        public int PriorityId { get; set; } = 35;
+
         private const string CapturePattern = @"\s*\@if\s*\s*\w*\s*";
 
         public string Translate(string code)

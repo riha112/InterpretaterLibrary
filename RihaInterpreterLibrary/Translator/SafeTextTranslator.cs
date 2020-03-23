@@ -9,6 +9,8 @@ namespace RihaInterpreterLibrary.Translator
     {
         private const string CapturePattern = @"""[^""]*""";
 
+        public int PriorityId { get; set; } = 0;
+
         public string Translate(string code)
         {
             return Regex.Replace(code, CapturePattern, m =>

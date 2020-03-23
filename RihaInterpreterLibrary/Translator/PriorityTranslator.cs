@@ -10,6 +10,8 @@ namespace RihaInterpreterLibrary.Translator
     {
         private const string CapturePattern = @"\((?>\((?<c>)|[^()]+|\)(?<-c>))*(?(c)(?!))\)";
 
+        public int PriorityId { get; set; } = 25;
+
         public string Translate(string code)
         {
             var lines = code.Split("\n");
@@ -38,7 +40,8 @@ namespace RihaInterpreterLibrary.Translator
             return string.Join('\n', newLines);
         }
 
-        private static string GetTempValuesName() => HeapMemory.GetHashedVariableName();
+        private static string GetTempValuesName() => 
+            HeapMemory.GetHashedVariableName();
 
         private static string GetSettingLine(string name, string value) =>
             $"set {name} as auto: {value}";

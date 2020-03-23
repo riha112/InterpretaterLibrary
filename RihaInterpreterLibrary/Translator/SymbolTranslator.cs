@@ -7,6 +7,8 @@ namespace RihaInterpreterLibrary.Translator
 {
     public class SymbolTranslator: ITranslator
     {
+        public int PriorityId { get; set; } = 30;
+
         private static readonly Dictionary<string, (string splitter, string replacer)> Library = new Dictionary<string, (string, string)>()
         {
             { @"\=\=\=",   ("===","compare.equal") },

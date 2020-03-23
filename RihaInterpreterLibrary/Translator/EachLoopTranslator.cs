@@ -9,6 +9,8 @@ namespace RihaInterpreterLibrary.Translator
     {
         private const string CapturePattern = @"\s*\@each\([\@\:\<\>\+\<\-\,\.\=\w\d\s]*\|[\:\<\>\+\<\-\,\.\=\w\d\s]*\)\s*";
 
+        public int PriorityId { get; set; } = 20;
+
         public string Translate(string code)
         {
             return Regex.Replace(code, CapturePattern, m =>
