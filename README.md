@@ -145,6 +145,14 @@ set testArr as array: [1, 2, 3, 10, 15]
 @each(mem|testArr)
 	print_line: mem
 close
+
+# ----------Function------------
+@func PrintTextXTimes(text|times)
+	@for(x@=0|x<times|x+=1)
+		print_line:text
+	close
+@endf
+PrintTextXTimes("hello - frome function"|4)
 ```
 ---
 ## Output
@@ -234,4 +242,8 @@ close
 082 |  3
 083 |  10
 084 |  15
+085 |  hello - frome function
+086 |  hello - frome function
+087 |  hello - frome function
+088 |  hello - frome function
 ```
