@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using RihaInterpreterLibrary.Processor;
 using RihaInterpreterLibrary.Translator;
 
 namespace RihaInterpreterLibrary
 {
     public static class Compiler
     {
-        public static int CurrentExecutionLine { get; private set; }
+        public static int ActiveLineNumber { get; set; }
 
         /// <summary>
         /// Prepares code by removing all unnecessary stuff:
@@ -18,27 +19,13 @@ namespace RihaInterpreterLibrary
         /// <returns>Compilation prepared code base lines</returns>
         private static List<string> GetClearCodeBase(string code)
         {
-            // TODO: Move to TranslatorLibrary
-            code = new SafeTextTranslator().Translate(code);
-            code = code.Replace("\t", "");
-            code = new ForLoopTranslator().Translate(code);
-            code = new EachLoopTranslator().Translate(code);
-            code = new PriorityTranslator().Translate(code);
-            code = new SymbolTranslator().Translate(code);
-            code = new IfTranslator().Translate(code);
+            TranslatorLibrary.RunCodeTroughTranslator(ref code);
 
             // Removes repeating whitespaces
             code = Utility.Utility.RemoveRepeatingSpace(code);
             code = Utility.Utility.RemoveColumnSpace(code);
 
-            // Splits code into lines
-            var lines = code.Split('\n').Where(
-                l => !(string.IsNullOrEmpty(l) || string.IsNullOrWhiteSpace(l)) // , so that it doesn't contain any empty lines
-            ).Where(
-                l => l[0] != '#'// and doesn't contain any comments
-            ).ToList();
-
-            return lines;
+            return code.Split('\n').ToList();
         }
 
         public static void Run(string[] rawLines)
@@ -48,50 +35,15 @@ namespace RihaInterpreterLibrary
             Output.Init();
 
             var lines = GetClearCodeBase(string.Join('\n', rawLines));
-            for(var i = 0; i < lines.Count; i++)
+
+            new LabelProcessor().Process(lines);
+
+            for(ActiveLineNumber = 0; ActiveLineNumber < lines.Count && ActiveLineNumber >= 0; ActiveLineNumber++)
             {
-                var line = lines[i];
-                CurrentExecutionLine = i;
+                var line = lines[ActiveLineNumber];
 
-                #region  Scope
-
-                // If scope is open
-                if (HeapMemory.Scopes.Count > 0)
-                {
-                    var scope = HeapMemory.Scopes[^1];
-                    // If condition is false 
-                    if ((bool)scope.Parameter.Value == false)
-                    {
-                        var words = line.Split(' ');
-                        if (words[0] == "open")
-                            scope.InsideScopesOpen++;
-
-                        if (words[0] == "close")
-                        {
-                            if(scope.InsideScopesOpen == 0)
-                                HeapMemory.Scopes.Remove(scope);
-                            scope.InsideScopesOpen--;
-                        }
-                        continue;
-                    }
-
-                    // If reached end of scope
-                    if (line == "close")
-                    {
-                        HeapMemory.Scopes.Remove(scope);
-
-                        // If "if" check then case closed
-                        if (scope.Type == ScopeType.Check)
-                            continue;
-
-                        // If "while" then go back to start until
-                        // parameter changes to false
-                        i = scope.StartLine - 1;
-                        continue;
-                    }
-                }
-
-                #endregion
+                if (ScopeController.DoScopesSkip(line))
+                    continue;
 
                 var lineActionHistory = new List<Node>();
                 var actions = line.Split(":").Reverse().ToList();

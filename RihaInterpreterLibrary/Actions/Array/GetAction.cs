@@ -12,7 +12,7 @@ namespace RihaInterpreterLibrary.Actions.Array
         public bool IsValid(string action) => action.ToLower() == ValidationPattern;
         public Node Execute(string[] actionInParts, List<Node> variables)
         {
-            double id = NodeController.NodeAsNumber(variables[^2]);
+            var id = NodeController.NodeAsNumber(variables[^2]);
             return ((List<Node>) variables[^1].Value)[(int)id];
         }
     }

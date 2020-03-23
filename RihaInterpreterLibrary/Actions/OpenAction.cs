@@ -21,7 +21,7 @@ namespace RihaInterpreterLibrary.Actions
             {
                 Type = type, 
                 Parameter = variables[^1], 
-                StartLine = Compiler.CurrentExecutionLine
+                StartLine = Compiler.ActiveLineNumber
             };
             HeapMemory.Scopes.Add(scope);
 
