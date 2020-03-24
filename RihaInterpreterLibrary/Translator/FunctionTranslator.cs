@@ -10,7 +10,7 @@ namespace RihaInterpreterLibrary.Translator
     public class FunctionTranslator: ITranslator
     {
         private const string CapturePattern =
-            @"\s*@func\s+[\w\d]*\s*\([\w\d\|]*\)\s*[\w\d\s\~\!\@\#\$\%\^\&\*\(\)\-\+\{\}\:\""\'\<\>\?\/\|\\\[\]\=]*@endfs*";
+            @"\s*@func\s+([\w\d\s\~\!\#\$\%\^\&\*\(\)\-\+\{\}\:\""\'\<\>\?\/\|\\\[\]\=]|@for|@if|@=|@each)*@endfs*";
 
         public int PriorityId { get; set; } = 13;
         private Dictionary<string, (string code,string[] param)> _functionInfo;
@@ -55,7 +55,7 @@ namespace RihaInterpreterLibrary.Translator
             // Replaces function calls with goto: function_name
             foreach (var info in _functionInfo)
             {
-                code = Regex.Replace(code, @"\s*" + info.Key + @"\s*\([\d\w\|]*\)s*", m =>
+                code = Regex.Replace(code, @"\s*" + info.Key + @"\s*\([\[\]\,\""\d\w\|]*\)s*", m =>
                 {
                     var text = m.ToString().Replace(" ", "").Replace("\n", "");
                     var parameters = text.

@@ -21,13 +21,14 @@ namespace RihaInterpreterLibrary.Translator
             { @"\>",   (">","compare.larger") },
             { @"\<",   ("<","compare.smaller") },
             { @"\*",   ("*","arithmetic.multiply") },
+            { @"\%",   ("%","arithmetic.module") },
         };
 
         public string Translate(string code)
         {
             foreach (var entire in Library)
             {
-                code = Regex.Replace(code, @"\s*-?[\w\d]+\s*" + entire.Key+ @"\s*-?[\w\d]+\s*", m =>
+                code = Regex.Replace(code, @"\s*-?[\w\d\[\]\,]+\s*" + entire.Key+ @"\s*-?[\w\d\[\]\,]+\s*", m =>
                 {
                     // Gets value without quotes
                     var value = m.ToString().Replace(" ", "");
