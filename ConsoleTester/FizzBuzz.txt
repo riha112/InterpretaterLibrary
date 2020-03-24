@@ -1,0 +1,13 @@
+﻿@func FizzBuzz(range)
+	@for(i@=0|i<range|i+=1)
+		@if((i%3) == 0)
+			print: "Fizz"
+		close
+		@if((i%5) == 0)
+			print: "Buzz"
+		close
+		print_line: "(": i: ")"
+	close
+@endf
+
+FizzBuzz(1000)

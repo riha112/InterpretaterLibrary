@@ -11,7 +11,7 @@ namespace ConsoleTester
         static void Main(string[] args)
         {
             var compiler = new RihaCompiler();
-            var lines = File.ReadAllLines(@"..\..\..\DemoCode.txt");
+            var lines = File.ReadAllLines(@"..\..\..\FizzBuzz.txt");
 
             //var code = string.Join('\n', lines);
 
