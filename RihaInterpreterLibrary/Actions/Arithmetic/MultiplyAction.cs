@@ -4,6 +4,9 @@ using System.Text;
 
 namespace RihaInterpreterLibrary.Actions.Arithmetic
 {
+    /// <summary>
+    /// Implements multiplication action into interpreter.
+    /// </summary>
     public class MultiplyAction : IAction
     {
         public int ArgumentCount { get; } = 2;

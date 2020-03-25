@@ -7,12 +7,18 @@ using RihaInterpreterLibrary.Actions;
 
 namespace RihaInterpreterLibrary
 {
+    /// <summary>
+    /// Contains list of all actions in project.
+    /// </summary>
     public static class LanguageLibrary
     {
         private static Dictionary<string, IAction> _actionDictionary;
 
         public static IAction GetActionByName(string name) => _actionDictionary.ContainsKey(name) ? _actionDictionary[name] : null;
 
+        /// <summary>
+        /// Loads all action types and then initializes them into _actionDictionary variable, for latter access
+        /// </summary>
         public static void BuildActionDictionary()
         {
             _actionDictionary = new Dictionary<string, IAction>();
@@ -20,8 +26,10 @@ namespace RihaInterpreterLibrary
             // Loads all action types from directory Actions
             var actionsTypes = new List<Type>();
 
+            // Action folder
             var namespacePath = $"{nameof(RihaInterpreterLibrary)}.{nameof(RihaInterpreterLibrary.Actions)}";
-
+            
+            // Sub-folders and main-folder
             var libraries = new List<string>
             {
                 namespacePath,
@@ -30,6 +38,8 @@ namespace RihaInterpreterLibrary
                 $"{namespacePath}.{nameof(RihaInterpreterLibrary.Actions.Array)}",       // Array library
                 $"{namespacePath}.{nameof(RihaInterpreterLibrary.Actions.Text)}"         // String library
             };
+
+            // Loads all actions from previously defined directories
             foreach (var library in libraries)
             {
                 actionsTypes.AddRange(
@@ -40,6 +50,7 @@ namespace RihaInterpreterLibrary
             // Initializes all actions into dictionary
             foreach (var actionType in actionsTypes)
             {
+                // If action contains IAction interface
                 if(!typeof(IAction).IsAssignableFrom(actionType))
                     continue;
 

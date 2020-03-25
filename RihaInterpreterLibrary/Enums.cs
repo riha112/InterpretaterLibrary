@@ -4,6 +4,8 @@ using System.Text;
 
 namespace RihaInterpreterLibrary
 {
+    // Stores all enum declarations
+
     public enum ValueType
     {
         Number,

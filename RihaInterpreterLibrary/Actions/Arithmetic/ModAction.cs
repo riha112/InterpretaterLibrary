@@ -4,6 +4,9 @@ using System.Text;
 
 namespace RihaInterpreterLibrary.Actions.Arithmetic
 {
+    /// <summary>
+    /// Implements module AKA "%" action into interpreter.
+    /// </summary>
     public class ModAction : IAction
     {
         public int ArgumentCount { get; } = 2;

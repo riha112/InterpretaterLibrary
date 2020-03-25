@@ -4,6 +4,9 @@ using System.Text;
 
 namespace RihaInterpreterLibrary
 {
+    /// <summary>
+    /// Stores all output lines from codes execution
+    /// </summary>
     public static class Output
     {
         public static List<string> OutputLines { get; set; }
@@ -16,7 +19,7 @@ namespace RihaInterpreterLibrary
         public static void Add(string text)
         {
             AddToLine(text);
-            OutputLines.Add("");
+            OutputLines.Add("");    // New line break
             AddedLineEvent?.Invoke(null, text);
         }
 

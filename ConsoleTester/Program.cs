@@ -11,24 +11,18 @@ namespace ConsoleTester
         static void Main(string[] args)
         {
             var compiler = new RihaCompiler();
+
+            // Loads code
             var lines = File.ReadAllLines(@"..\..\..\FizzBuzz.txt");
 
-            //var code = string.Join('\n', lines);
-
+            // Subscribes to events
             Output.AddedLineEvent += OnAddedPrintEvent;
             Output.AddedInLineEvent += OnAddedInLinePrintEvent;
+    
             Console.Write("000 |  ");
-
+            
+            // Runs code
             Compiler.Run(lines);
-            //for (var i = 0; i < Output.OutputLines.Count; i++)
-            //    Console.WriteLine($" {i:D2} |  {Output.OutputLines[i]}");
-
-            //  compiler.Execute(lines);
-            //var output = compiler.CodeOutput.Split('\n');
-            //foreach (var line in output)
-            //{
-            //    Console.WriteLine(line);
-            //}
         }
 
         private static void OnAddedPrintEvent(object? sender, string line)

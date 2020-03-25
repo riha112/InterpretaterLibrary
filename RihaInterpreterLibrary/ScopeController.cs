@@ -6,11 +6,13 @@ namespace RihaInterpreterLibrary
 {
     public static class ScopeController
     {
+        public static List<Scope> Scopes { get; set; } = new List<Scope>();
+
         public static bool DoScopesSkip(string line)
         {
-            if (HeapMemory.Scopes.Count > 0)
+            if (Scopes.Count > 0)
             {
-                var scope = HeapMemory.Scopes[^1];
+                var scope = Scopes[^1];
                 // If condition is false 
                 if ((bool)scope.Parameter.Value == false)
                 {
@@ -21,7 +23,7 @@ namespace RihaInterpreterLibrary
                     if (words[0] == "close")
                     {
                         if (scope.InsideScopesOpen == 0)
-                            HeapMemory.Scopes.Remove(scope);
+                            Scopes.Remove(scope);
                         scope.InsideScopesOpen--;
                     }
                     return true;
@@ -30,9 +32,10 @@ namespace RihaInterpreterLibrary
                 // If reached end of scope
                 if (line == "close")
                 {
-                    HeapMemory.Scopes.Remove(scope);
+                    Scopes.Remove(scope);
 
-                    // If "if" check then case closed
+                    // If scope with type check (if) then scope is closed
+                    // as it has no repeatability.
                     if (scope.Type == ScopeType.Check)
                         return true;
 

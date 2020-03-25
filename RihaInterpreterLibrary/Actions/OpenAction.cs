@@ -23,7 +23,7 @@ namespace RihaInterpreterLibrary.Actions
                 Parameter = variables[^1], 
                 StartLine = Compiler.ActiveLineNumber
             };
-            HeapMemory.Scopes.Add(scope);
+            ScopeController.Scopes.Add(scope);
 
             return variables[^1];
         }

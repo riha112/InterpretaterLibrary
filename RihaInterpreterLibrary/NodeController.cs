@@ -8,16 +8,21 @@ namespace RihaInterpreterLibrary
 {
     public static class NodeController
     {
+        /// <summary>
+        /// Assigns nodes type by checking nodes value
+        /// </summary>
         public static void SetTypeFromValue(Node node)
         {
             var valueAsText = node.Value.ToString();
-
+            // Number type
             if (double.TryParse(valueAsText, out var n))
             {
                 node.Value = n;
                 node.Type = ValueType.Number;
                 return;
             }
+
+            // Boolean type
             if (bool.TryParse(valueAsText, out var b))
             {
                 node.Value = b;
@@ -25,12 +30,12 @@ namespace RihaInterpreterLibrary
                 return;
             }
 
+            // Array value
             if (node.Value is List<Node>)
             {
                 node.Type = ValueType.Array;
                 return;
             }
-
             if (ArrayController.StringIsArray((string)node.Value))
             {
                 node.Value = ArrayController.StringToArray((string) node.Value);
@@ -38,6 +43,7 @@ namespace RihaInterpreterLibrary
                 return;
             }
 
+            // Text value
             node.Value = node.Value.ToString();
             node.Type = ValueType.Text;
         }

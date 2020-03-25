@@ -23,13 +23,18 @@ namespace RihaInterpreterLibrary
             {
                 currentVariable.Add( variable );
 
+                // ---- Selects sub-array ----
+                // If current variable actually is a opening of
+                // sub-array
                 if (variable[0] == '[')
                     openCount++;
                 else if (variable.Last() == ']' && openCount > 0)
                     openCount--;
                 
+                // Skip if currently in sub-array
                 if (openCount > 0)
                     continue;
+                // ---- end ----
 
                 realVariableList.Add(string.Join(',',currentVariable));
                 currentVariable = new List<string>();
