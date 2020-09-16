@@ -77,6 +77,19 @@ namespace RihaInterpreterLibrary
                 case ValueType.Text:
                     target.Value += NodeAsText(value);
                     break;
+                case ValueType.Array:
+                    switch (value.Type)
+                    {
+                        case ValueType.Array:
+                            ((List<Node>)target.Value).AddRange(
+                                ((List<Node>)value.Value)
+                            );
+                            break;
+                        default:
+                            ((List<Node>) target.Value).Add(value);
+                            break;
+                    }
+                    break;
             }
         }
     }

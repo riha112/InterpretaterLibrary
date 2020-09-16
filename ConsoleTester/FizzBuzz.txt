@@ -20,3 +20,14 @@
 
 
 FizzBuzz(1000)
+
+test @= "Hello world"
+print_line: (type_of: test)
+
+arr_a @= [11, 23, asdsd, 4]
+print_line: arr_a
+arr_a += [33, aa]
+print_line: arr_a
+arr_a += "123"
+print_line: arr_a
+print_line: (array.get:arr_a:((array.length:arr_a) -= 1))
