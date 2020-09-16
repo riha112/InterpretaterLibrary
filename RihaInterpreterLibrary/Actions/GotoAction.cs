@@ -7,7 +7,13 @@ namespace RihaInterpreterLibrary.Actions
 {
     public class GotoAction : IAction
     {
-        public static int LastGotoLine { get; set; } = -1; 
+        public static List<int> GoToMemory { get; set; } = new List<int>() { -1 };
+
+        public static int LastGotoLine
+        {
+            get => GoToMemory[^1]; 
+            set => GoToMemory.Add(value);
+        }
 
         public int ArgumentCount { get; } = 1;
         public string ActionName { get; } = "goto";

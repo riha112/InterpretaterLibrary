@@ -15,7 +15,7 @@ namespace RihaInterpreterLibrary.Actions
             if (GotoAction.LastGotoLine != -1)
             {
                 Compiler.ActiveLineNumber = GotoAction.LastGotoLine;
-                GotoAction.LastGotoLine = -1;
+                GotoAction.GoToMemory.RemoveAt(GotoAction.GoToMemory.Count - 1);
             }
             else
             {

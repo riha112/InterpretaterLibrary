@@ -23,6 +23,8 @@ namespace ConsoleTester
             
             // Runs code
             Compiler.Run(lines);
+
+            Console.Write("DONE");
         }
 
         private static void OnAddedPrintEvent(object? sender, string line)
