@@ -12,6 +12,7 @@ namespace RihaInterpreterLibrary.Actions
         private const string ValidationPattern = @"type_of";
 
         public bool IsValid(string action) => action.ToLower() == ValidationPattern;
+        
         public Node Execute(string[] actionInParts, List<Node> variables)
         {
             return new Node(variables[^1].Type.ToString(), ValueType.Text);
